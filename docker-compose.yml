@@ -1,0 +1,20 @@
+version: "3"
+
+services:
+  myapp-web:
+    container_name: myapp-web
+    # ./myapp-web/Dockerfile でイメージをビルド
+    build:
+      context: ./myapp-web
+      dockerfile: Dockerfile
+    # 80 番ポートを割り当て
+    ports:
+      - 80:80
+    # ローカル の ./html フォルダを
+    # コンテナの /usr/share/nginx/html にマウント
+    volumes:
+      - ../html:/usr/share/nginx/html
+
+  php:
+    build: ../php
+    image: php:8-fpm
